@@ -1,1 +1,1017 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fuencor Inmobiliaria – Plataforma de Capacitación A.C.R.L.</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --fuencor-dark: #111111;
+    --fuencor-green: #6ab04c;
+    --fuencor-green-dark: #4e8a35;
+    --fuencor-green-light: #e8f5e0;
+    --fuencor-white: #ffffff;
+    --fuencor-gray: #f4f4f4;
+    --fuencor-gray-mid: #888;
+    --fuencor-text: #222;
+    --fuencor-border: #e0e0e0;
+    --accent-orange: #e8701a;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--fuencor-text);
+    background: var(--fuencor-white);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--fuencor-white);
+    border-bottom: 1px solid var(--fuencor-border);
+    display: flex;
+    align-items: stretch;
+    height: 70px;
+  }
+
+  .nav-logo {
+    background: var(--fuencor-dark);
+    width: 180px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  .nav-logo-text {
+    color: var(--fuencor-white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+
+  .nav-logo-sub {
+    color: #aaa;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    display: block;
+    margin-top: 2px;
+    text-align: center;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 0 24px;
+    gap: 4px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--fuencor-text);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .nav-links a:hover {
+    background: var(--fuencor-gray);
+    color: var(--fuencor-green-dark);
+  }
+
+  .nav-links a.locked {
+    color: var(--fuencor-gray-mid);
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .nav-links a.locked:hover {
+    background: none;
+    color: var(--fuencor-gray-mid);
+  }
+
+  .nav-badge {
+    background: var(--fuencor-green);
+    color: white;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-left: 4px;
+  }
+
+  .lock-icon {
+    font-size: 11px;
+    opacity: 0.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 340px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+    filter: brightness(0.55);
+    background: linear-gradient(135deg, #1a3c1a 0%, #2d5a2d 40%, #1a4040 100%);
+  }
+
+  .hero-bg-fallback {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #111 0%, #1a3c1a 50%, #0d2b0d 100%);
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  /* Photo-like hero overlay with a house silhouette pattern */
+  .hero-img-sim {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    background:
+      linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.4) 100%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23334433'/%3E%3C/svg%3E");
+    background-size: cover;
+  }
+
+  /* Use a real looking background with CSS */
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    background: #1a2e1a;
+    overflow: hidden;
+  }
+
+  .hero-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 60%, rgba(180,220,140,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%);
+    z-index: 2;
+  }
+
+  /* Simulate a dark living room / luxury interior */
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg,
+        #0a1a0a 0%,
+        #1a2e1a 15%,
+        #243824 30%,
+        #1e3020 50%,
+        #162616 70%,
+        #0f1f0f 100%
+      );
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .hero-badge-pill {
+    background: var(--fuencor-green);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--fuencor-white);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+
+  .hero-title span {
+    color: var(--fuencor-green);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 22px;
+    max-width: 560px;
+    line-height: 1.5;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--fuencor-green);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--fuencor-green-dark); }
+
+  .btn-ghost {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.6);
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+  /* ── ANNOUNCEMENT STRIP ── */
+  .strip {
+    background: var(--fuencor-green);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .strip strong { font-weight: 700; }
+
+  /* ── SECTIONS GRID ── */
+  .sections-wrap {
+    padding: 52px 60px;
+    background: var(--fuencor-white);
+  }
+
+  .sections-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .sections-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--fuencor-text);
+    margin-bottom: 8px;
+  }
+
+  .sections-header p {
+    font-size: 14px;
+    color: var(--fuencor-gray-mid);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .sec-card {
+    background: var(--fuencor-white);
+    border: 1px solid var(--fuencor-border);
+    border-radius: 10px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sec-card:hover {
+    border-color: var(--fuencor-green);
+    transform: translateY(-3px);
+  }
+
+  .sec-card.coming::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+
+  .sec-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--fuencor-green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .sec-icon-wrap svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--fuencor-green-dark);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .sec-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--fuencor-text);
+    margin-bottom: 6px;
+  }
+
+  .sec-card p {
+    font-size: 12px;
+    color: var(--fuencor-gray-mid);
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+
+  .tag-coming {
+    display: inline-block;
+    background: #fff3e6;
+    color: #c05e00;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid #f5cfa0;
+    letter-spacing: 0.3px;
+  }
+
+  .tag-available {
+    display: inline-block;
+    background: var(--fuencor-green-light);
+    color: var(--fuencor-green-dark);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid #b0d890;
+    letter-spacing: 0.3px;
+  }
+
+  .lock-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+
+  .lock-badge svg {
+    width: 16px;
+    height: 16px;
+    stroke: #bbb;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ── PROPOSAL BAND ── */
+  .proposal-band {
+    background: var(--fuencor-dark);
+    padding: 44px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .proposal-band h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: white;
+    line-height: 1.3;
+    max-width: 560px;
+  }
+
+  .proposal-band h2 span {
+    color: var(--fuencor-green);
+  }
+
+  .proposal-band p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    max-width: 560px;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  .proposal-btn {
+    background: var(--fuencor-green);
+    color: white;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  .proposal-btn:hover { background: var(--fuencor-green-dark); }
+
+  /* ── STATS ── */
+  .stats-band {
+    background: var(--fuencor-gray);
+    padding: 40px 60px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 0 48px;
+    border-right: 1px solid var(--fuencor-border);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--fuencor-green-dark);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-lbl {
+    font-size: 12px;
+    color: var(--fuencor-gray-mid);
+    font-weight: 500;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how-wrap {
+    padding: 52px 60px;
+    background: white;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .how-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .how-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .how-header p {
+    font-size: 13px;
+    color: var(--fuencor-gray-mid);
+  }
+
+  .how-steps {
+    display: flex;
+    gap: 0;
+    position: relative;
+    align-items: flex-start;
+  }
+
+  .how-step {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+  }
+
+  .how-step::after {
+    content: '→';
+    position: absolute;
+    right: -12px;
+    top: 18px;
+    font-size: 18px;
+    color: var(--fuencor-green);
+    font-weight: 700;
+  }
+
+  .how-step:last-child::after { display: none; }
+
+  .step-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--fuencor-green);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+
+  .how-step h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--fuencor-text);
+  }
+
+  .how-step p {
+    font-size: 12px;
+    color: var(--fuencor-gray-mid);
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--fuencor-dark);
+    padding: 28px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 3px solid var(--fuencor-green);
+  }
+
+  .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    letter-spacing: 2px;
+  }
+
+  .footer-logo span {
+    color: var(--fuencor-green);
+    font-size: 11px;
+    font-weight: 400;
+    display: block;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover { color: var(--fuencor-green); }
+
+  .footer-right {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    text-align: right;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal {
+    background: white;
+    border-radius: 12px;
+    padding: 36px 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .modal-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--fuencor-green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+
+  .modal-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: var(--fuencor-green-dark);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .modal h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--fuencor-text);
+  }
+
+  .modal p {
+    font-size: 14px;
+    color: var(--fuencor-gray-mid);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .modal p strong {
+    color: var(--fuencor-green-dark);
+    font-weight: 700;
+  }
+
+  .modal-close {
+    background: var(--fuencor-green);
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  @media (max-width: 768px) {
+    .sections-grid { grid-template-columns: 1fr 1fr; }
+    .sections-wrap, .proposal-band, .stats-band, footer { padding: 32px 20px; }
+    .hero-title { font-size: 22px; }
+    .how-steps { flex-direction: column; gap: 24px; }
+    .how-step::after { display: none; }
+    .stat-item { padding: 0 24px; }
+    .nav-links { gap: 0; padding: 0 10px; }
+    .nav-links a { padding: 6px 8px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div>
+      <div class="nav-logo-text">FUENCOR</div>
+      <span class="nav-logo-sub">INMOBILIARIA · CONSTRUCTORA</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#">Propiedades</a>
+    <a href="#">Contacto</a>
+    <a href="#">Aviso de privacidad</a>
+    <a href="#">Directorio</a>
+    <a href="#">Nosotros</a>
+    <a href="#">Otros</a>
+    <a href="#" class="locked">
+      <svg class="lock-icon" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Manual A.C.R.L.
+    </a>
+    <a href="#" class="locked">
+      <svg class="lock-icon" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Checklist
+    </a>
+    <a href="#" class="locked">
+      <svg class="lock-icon" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Portal Interno
+    </a>
+    <a href="#" style="color: var(--fuencor-gray-mid); font-size:13px;">Favoritos <span class="nav-badge">0</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-content">
+    <div class="hero-badge-pill">Sistema A.C.R.L. · Propuesta Fuencor 2026</div>
+    <h1 class="hero-title">
+      De la labor individual al<br>
+      <span>Sistema de Prosperidad Colectiva</span>
+    </h1>
+    <p class="hero-sub">Plataforma digital de capacitación, seguimiento y crecimiento para asesores inmobiliarios Fuencor</p>
+    <div class="hero-btns">
+      <a href="#propuesta" class="btn-primary">Ver propuesta completa</a>
+      <a href="#secciones" class="btn-ghost">Explorar secciones</a>
+    </div>
+  </div>
+</div>
+
+<!-- STRIP -->
+<div class="strip">
+  <strong>Propuesta activa:</strong> Si Fuencor acepta, todas las secciones se activan de inmediato y se integran los datos reales del equipo.
+</div>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat-item">
+    <div class="stat-num">7</div>
+    <div class="stat-lbl">días para primer asesor productivo</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5</div>
+    <div class="stat-lbl">secciones del sistema</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3</div>
+    <div class="stat-lbl">niveles de carrera definidos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">0</div>
+    <div class="stat-lbl">costo de implementación inicial</div>
+  </div>
+</div>
+
+<!-- SECTIONS -->
+<div class="sections-wrap" id="secciones">
+  <div class="sections-header">
+    <h2>Lo que la plataforma incluye</h2>
+    <p>Cada sección resuelve uno de los problemas raíz detectados en el diagnóstico. Las secciones se activan al confirmar la propuesta.</p>
+  </div>
+  <div class="sections-grid">
+
+    <div class="sec-card coming" onclick="openModal('manual')">
+      <div class="lock-badge">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div class="sec-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+      </div>
+      <h3>Manual interactivo de capacitación</h3>
+      <p>Videos, scripts de venta, técnicas de seguimiento y manejo de objeciones. Nuevo asesor productivo en 7 días.</p>
+      <span class="tag-coming">Próximamente disponible</span>
+    </div>
+
+    <div class="sec-card coming" onclick="openModal('checklist')">
+      <div class="lock-badge">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div class="sec-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      </div>
+      <h3>Checklist de actividades diarias</h3>
+      <p>Tareas medibles con fecha, estado y porcentaje de avance. Convierte el trabajo improvisado en sistema auditable.</p>
+      <span class="tag-coming">Próximamente disponible</span>
+    </div>
+
+    <div class="sec-card coming" onclick="openModal('semaforo')">
+      <div class="lock-badge">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div class="sec-icon-wrap">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <h3>Semáforo de desempeño</h3>
+      <p>Métricas semanales por asesor. Verde, amarillo o rojo según citas, ventas y seguimiento. Vista diferente para supervisor y asesor.</p>
+      <span class="tag-coming">Próximamente disponible</span>
+    </div>
+
+    <div class="sec-card coming" onclick="openModal('gamificacion')">
+      <div class="lock-badge">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div class="sec-icon-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <h3>Gamificación e incentivos</h3>
+      <p>Insignias, ranking de asesores, puntos por tareas y reconocimientos. Motivación activa, menor rotación.</p>
+      <span class="tag-coming">Próximamente disponible</span>
+    </div>
+
+    <div class="sec-card coming" onclick="openModal('escalera')">
+      <div class="lock-badge">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div class="sec-icon-wrap">
+        <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h3>Escalera de carrera</h3>
+      <p>Prospecto → Asesor → Líder de célula. Requisitos claros, beneficios por nivel y trayectoria visible para cada colaborador.</p>
+      <span class="tag-coming">Próximamente disponible</span>
+    </div>
+
+    <div class="sec-card coming" onclick="openModal('portal')">
+      <div class="lock-badge">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div class="sec-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Portal interno por rol</h3>
+      <p>Vista diferente para asesor y supervisor. Colima y Villa de Álvarez organizados por zona. Acceso con usuario y contraseña.</p>
+      <span class="tag-coming">Próximamente disponible</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="background: var(--fuencor-gray); padding: 52px 60px;">
+  <div class="how-wrap" style="padding: 0;">
+    <div class="how-header">
+      <h2>¿Cómo funciona el sistema A.C.R.L.?</h2>
+      <p>Cuatro procesos que convierten el autoempleo en un negocio replicable y auditable</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-circle">A</div>
+        <h4>Atracción</h4>
+        <p>Embudo digital que segmenta y atrae perfiles alineados a la cultura Fuencor de forma constante</p>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">C</div>
+        <h4>Capacitación</h4>
+        <p>Metodología exprés que lleva al nuevo asesor a ser productivo en menos de 7 días</p>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">R</div>
+        <h4>Retención</h4>
+        <p>Plan de incentivos, gamificación y escalera de carrera que mantiene motivado al equipo</p>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">L</div>
+        <h4>Liderazgo</h4>
+        <p>Escalera de carrera que permite a los mejores asesores convertirse en líderes de célula</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROPOSAL BAND -->
+<div class="proposal-band" id="propuesta">
+  <div>
+    <h2>Esta plataforma <span>no reemplaza</span> la página web actual de Fuencor.</h2>
+    <p>Es un portal interno que complementa el ecosistema digital existente. Si Fuencor acepta la propuesta, se activan todas las secciones e integran los datos reales del equipo en menos de 48 horas.</p>
+  </div>
+  <button class="proposal-btn" onclick="openModal('propuesta')">Ver propuesta completa</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    FUENCOR
+    <span>INMOBILIARIA · CONSTRUCTORA</span>
+  </div>
+  <div class="footer-links">
+    <a href="#">Propiedades</a>
+    <a href="#">Contacto</a>
+    <a href="#">Aviso de privacidad</a>
+    <a href="#">Directorio</a>
+    <a href="#">Nosotros</a>
+  </div>
+  <div class="footer-right">
+    Colima · Villa de Álvarez<br>
+    Sistema A.C.R.L. © 2026
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24" id="modal-icon-svg"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    </div>
+    <h3 id="modal-title">Sección bloqueada</h3>
+    <p id="modal-body">Esta sección se activa si Fuencor acepta la propuesta.</p>
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('show')">Entendido</button>
+  </div>
+</div>
+
+<script>
+const modalData = {
+  manual: {
+    title: 'Manual interactivo de capacitación',
+    body: 'Incluye videos cortos, scripts de venta, guías de atención al cliente, técnicas de publicación de propiedades, manejo de objeciones y seguimiento. <strong>Objetivo: nuevo asesor productivo en menos de 7 días.</strong>'
+  },
+  checklist: {
+    title: 'Checklist de actividades diarias',
+    body: 'Cada asesor marca sus tareas del día: contactar clientes, publicar propiedades, agendar visitas y actualizar prospectos. <strong>El supervisor ve el avance en tiempo real.</strong>'
+  },
+  semaforo: {
+    title: 'Semáforo de desempeño',
+    body: 'Indicador visual por asesor: verde (excelente), amarillo (en progreso), rojo (requiere apoyo). Basado en tareas completadas, citas agendadas y ventas. <strong>Vista diferente para asesor y supervisor.</strong>'
+  },
+  gamificacion: {
+    title: 'Gamificación e incentivos',
+    body: 'Insignias como "Primer cierre", "Top vendedor semanal" y "Mayor seguimiento". Ranking semanal, puntos por tareas y niveles de reconocimiento. <strong>Genera motivación y reduce rotación.</strong>'
+  },
+  escalera: {
+    title: 'Escalera de carrera',
+    body: 'Tres niveles definidos: Prospecto (30% comisión), Asesor Fuencor (55% comisión) y Líder de célula (70% + 10% override de su equipo). <strong>Cada nivel tiene requisitos claros y beneficios tangibles.</strong>'
+  },
+  portal: {
+    title: 'Portal interno por rol',
+    body: 'Login con usuario y contraseña. Vista asesor: capacitación, tareas, progreso e insignias. Vista supervisor: lista de asesores, métricas, semáforos y observaciones. <strong>Organizado por zonas: Colima y Villa de Álvarez.</strong>'
+  },
+  propuesta: {
+    title: 'Propuesta Sistema A.C.R.L.',
+    body: 'Esta plataforma forma parte de la propuesta integral para convertir Fuencor en un sistema de negocio replicable y escalable. Si Fuencor acepta, todas las secciones se activan en menos de 48 horas, sin costo de implementación inicial. <strong>¿Listo para dar el siguiente paso?</strong>'
+  }
+};
+
+function openModal(key) {
+  const d = modalData[key];
+  if (!d) return;
+  document.getElementById('modal-title').textContent = d.title;
+  document.getElementById('modal-body').innerHTML = d.body;
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal(e) {
+  if (e.target.id === 'modal') {
+    document.getElementById('modal').classList.remove('show');
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('modal').classList.remove('show');
+});
+
+document.querySelectorAll('a.locked').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const label = a.textContent.trim();
+    const key = label.includes('Manual') ? 'manual' : label.includes('Checklist') ? 'checklist' : 'portal';
+    openModal(key);
+  });
+});
+</script>
+</body>
+</html>
